@@ -15,22 +15,9 @@ const app = express();
 require("./config")(app);
 
 
-
-
-
-// 👇 Start handling routes here
-// Contrary to the views version, all routes are controlled from the routes/index.js
-const allRoutes = require("./routes");
-app.use("/api", allRoutes);
-
-// ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
-require("./error-handling")(app);
-
-
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-const DB_URL = process.env.MONGODB_URI;
-
+const DB_URL = "mongodb://localhost/free-your-stuff"
 app.use(
 	session({
 		secret: process.env.SESSION_SECRET,
@@ -43,5 +30,18 @@ app.use(
 		})
 	})
 )
+
+
+const allRoutes = require("./routes");
+app.use("/", allRoutes);
+
+const auth = require("./routes/auth")
+app.use("/auth", auth)
+
+
+// ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
+require("./error-handling")(app);
+
+
 
 module.exports = app;
