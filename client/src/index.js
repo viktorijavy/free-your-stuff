@@ -3,13 +3,26 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router } from 'react-router-dom';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
+
+axios.get('/auth/loggedin')
+  .then(response => {
+    console.log('logged in user: ', response.data);
+    const user = response.data;
+  
 ReactDOM.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router>
+    <App user={user}/>
+    </Router>
+  </React.StrictMode>
+  ,
   document.getElementById('root')
 );
+  })
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
