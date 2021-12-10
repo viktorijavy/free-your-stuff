@@ -2,7 +2,7 @@ import { useState } from 'react'
 import axios from 'axios';
 // import { login } from '../services/auth';
 import { useNavigate } from 'react-router-dom'
-import Items from './Items'
+// import Items from './Items'
 
 
 export default function Login(props) {
@@ -17,7 +17,7 @@ export default function Login(props) {
 
         axios.post('/auth/login', { email, name, password })
             .then(response => {
-                console.log(response)
+                console.log('response when log-in', response)
                 if (response.message) {
                     // reset the form 
                     setEmail('');
@@ -27,7 +27,7 @@ export default function Login(props) {
 
                 } else {
                     // return response.data;
-                   
+                   //props.setUser(props.user)
                     navigate('/items')
                 }
             })

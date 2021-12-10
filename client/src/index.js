@@ -14,12 +14,9 @@ axios.get('/auth/loggedin')
     const user = response.data;
   
 ReactDOM.render(
-  <React.StrictMode>
   <Router>
     <App user={user}/>
-    </Router>
-  </React.StrictMode>
-  ,
+    </Router>,
   document.getElementById('root')
 );
   })

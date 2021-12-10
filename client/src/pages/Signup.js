@@ -24,12 +24,12 @@ export default function Signup() {
 
 		axios.post('/auth/signup', requestBody)
 			.then(response => {
-				// redirect -> login 
+				 
 				navigate('/login')
 			})
 			.catch(error => {
-				const errorDescrition = error.response.data.message
-				setErrorMessage(errorDescrition)
+				const errorDescription = error.response.data.message
+				setErrorMessage(errorDescription)
 			})
 	}
 
@@ -39,17 +39,17 @@ export default function Signup() {
 			<form onSubmit={handleSubmit}>
 				<label>Email: </label>
 				<input type="text" name="email" value={email} onChange={handleEmail} />
-				<label>Password: </label>
-				<input type="password" value={password} onChange={handlePassword} />
 				<label>Name: </label>
 				<input type="text" value={name} onChange={handleName} />
+				<label>Password: </label>
+				<input type="password" value={password} onChange={handlePassword} />
 
 				<button type="submit">Sign Up</button>
 			</form>
 
 			{errorMessage && <p>{errorMessage}</p>}
 
-			<p>Already have an accoun?</p>
+			<p>Already have an account?</p>
 			<Link to='/login'>Login</Link>
 		</div>
 	)
