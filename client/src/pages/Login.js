@@ -27,7 +27,7 @@ export default function Login(props) {
 
                 } else {
                     // return response.data;
-                   //props.setUser(props.user)
+                   props.setUser(response.data)
                     navigate('/items')
                 }
             })

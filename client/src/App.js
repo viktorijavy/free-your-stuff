@@ -23,7 +23,7 @@ function App(props) {
 
       <Navbar user={user} setUser={addUser}/>
       
-      <AddItem/> 
+      {/* <AddItem/>  */}
        <Routes>
        <Route path='/' element={<Home />} />
        <Route path='/signup' element={<Signup user={user}/>} />
