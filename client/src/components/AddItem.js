@@ -4,7 +4,7 @@ import axios from 'axios';
 // import the service file since we need it to send (and get) the data to(from) the server
 import service from "../cloudinary/service";
 
-function AddItem (){
+function AddItem (props)   {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("")
@@ -37,7 +37,14 @@ function AddItem (){
     axios
       .post('/items', requestBody)
 
-      .then((response) => {})
+      .then(() => {
+        setTitle('');
+				setDescription('');
+        setAddress('');
+        setImageUrl('');
+				// we need to trigger 'getAllProjects' in the ProjectListPage component
+				props.refreshItems()
+      })
 
       .catch((err) => console.log(err));
   };

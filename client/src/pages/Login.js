@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Login(props) {
     const [email, setEmail] = useState('')
-    const [name, setName] = useState('');
+    // const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const navigate = useNavigate()
@@ -15,13 +15,12 @@ export default function Login(props) {
     const handleSubmit = e => {
         e.preventDefault();
 
-        axios.post('/auth/login', { email, name, password })
+        axios.post('/auth/login', { email, password })
             .then(response => {
                 console.log('response when log-in', response)
                 if (response.message) {
                     // reset the form 
                     setEmail('');
-                    setName('');
                     setPassword('');
 
 
@@ -41,37 +40,30 @@ export default function Login(props) {
     }
     
     return (
-        <>
-            <h3>Login</h3>
-            <form onSubmit={handleSubmit}>
+        <div className="wrap">
+            <h3 className="register-title">Login</h3>
+            <form className="register" onSubmit={handleSubmit}>
 
-                <label htmlFor="email">Email: </label>
+                
                 <input
                     type="email"
-                    name="email"
+                    placeholder="Email address"
+                    className="register-input"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                 />
-
-
-                <label htmlFor="name">Name: </label>
-                <input
-                    type="text"
-                    name="name"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                />
-                <label htmlFor="password">Password: </label>
+                
                 <input
                     type="password"
-                    name="password"
+                    placeholder="Password"
+                    className="register-input"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
-                <button type="submit">Log in 🔑</button>
+                <button  className="register-button"type="submit">Log in 🔑</button>
 
             </form>
             {message && <p>{message}</p>}
-        </>
+        </div>
     )
 }

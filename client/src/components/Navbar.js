@@ -24,26 +24,26 @@ export default function Navbar(props) {
   
 
 	return (
-		<nav>
+		<nav className='topnav'>
 			{props.user ? (
 				<>
 					<Link to="/">
-						<button>Home</button>
+						<p>Home</p>
 					</Link>
 					<Link to="/items">
-						<button>Items</button>
+						<p>Items</p>
 					</Link>
 					<Link to="/" onClick={() => handleLogout()}>
-						<button>Logout</button>
+						<p className='logout'>Logout</p>
 					</Link>
 				</>
 			) : (
 				<>
 					<Link to="/signup">
-						<button>Signup</button>
+						<p>Signup</p>
 					</Link>
 					<Link to="/login">
-						<button>Login</button>
+						<p>Login</p>
 					</Link>
 				</>
 			)}

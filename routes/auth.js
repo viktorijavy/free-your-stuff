@@ -26,7 +26,7 @@ router.post("/signup", (req, res, next) => {
 
             if (userFromDB !== null) {
 
-                res.status(400).json({ message: 'Username is already taken' });
+                res.status(400).json({ message: 'Email is already taken' });
             } else {
 
 
@@ -48,7 +48,7 @@ router.post("/signup", (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-    const { email, name, password } = req.body;
+    const { email, password } = req.body;
 
     User.findOne({ email: email })
         .then(userFromDB => {
@@ -69,7 +69,7 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/loggedin', (req, res, next) => {
-    console.log('this is the loggedin user from the sessios', req.session.user)
+    console.log('this is the loggedin user from the session', req.session.user)
     const user = req.session.user
     res.json(user)
 })

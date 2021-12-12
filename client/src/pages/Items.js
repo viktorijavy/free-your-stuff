@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from "react";
-import service from "../cloudinary/service"
+// import service from "../cloudinary/service"
 import AddItem from '../components/AddItem'
-// import axios from "axios";
+import axios from "axios";
 // import { Link } from "react-router-dom";
 
 
@@ -10,20 +10,25 @@ import AddItem from '../components/AddItem'
 export default function Items() {
     const [items, setItems] = useState([]);
 
-  // When the component mounts we run an effect to get a list of movies from the server
-  useEffect(() => {
-    service
-      .getItems()
-      .then((data) => {
-        
-        setItems(data);
-      })
-      .catch((err) => console.log(err));
-  }, []); //  <-- This effect will run only once after the initial render
+
+
+  const getAllItems = () => {
+		// request all the projects from the server
+		axios.get('/items')
+			.then(response => {
+				console.log(response)
+				setItems(response.data)
+			})
+			.catch(err => console.log(err))
+	}
+
+	useEffect(() => {
+		getAllItems()
+	}, [])
 
   return (
     <div>
-    <AddItem/>
+    <AddItem refreshItems={getAllItems}/>
       <h2>All Items</h2>
 
       {items.map((item) => (
