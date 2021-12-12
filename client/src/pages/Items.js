@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from "react";
 // import service from "../cloudinary/service"
-import AddItem from '../components/AddItem'
+// import AddItem from './AddItem'
 import axios from "axios";
 // import { Link } from "react-router-dom";
 
@@ -28,7 +28,9 @@ export default function Items() {
 
   return (
     <div>
-    <AddItem refreshItems={getAllItems}/>
+    <div>
+    {/* <AddItem refreshItems={getAllItems}/> */}
+    </div>
       <h2>All Items</h2>
 
       {items.map((item) => (

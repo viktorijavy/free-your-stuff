@@ -47,19 +47,23 @@ router.post('/items', fileUploader.single("imageUrl"), (req, res, next) => {
         res.json({ secure_url: req.file.path });
     });
 
-    // POST '/api/movies' => for saving a new movie in the database
-
-    //   router.post('/items', (req, res, next) => {
-
-
-    //     Item.create(req.body)
-    //       .then(createdItem => {
-    //           console.log(req.body)
-
-    //         res.status(200).json(createdItem);
-    //       })
-    //       .catch(err => next(err));
-    //   });
+    router.get('/items/:id', (req, res, next) => {
+        //console.log(req.session.user);
+        Item.findById(req.params.id)
+            .then(item => {
+                // check if the id is not valid
+                // if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    
+                if (!item) {
+                    res.status(404).json(item);
+                } else {
+                    res.status(200).json(item);
+                }
+            })
+            .catch(err => {
+                next(err);
+            })
+    });
 
 
 

@@ -36,6 +36,8 @@ export default function Navbar(props) {
 					<Link to="/" onClick={() => handleLogout()}>
 						<p className='logout'>Logout</p>
 					</Link>
+
+					<Link to="/items/add"><p>Add new item</p></Link>
 				</>
 			) : (
 				<>

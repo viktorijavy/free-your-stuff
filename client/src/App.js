@@ -6,14 +6,15 @@ import Login from './pages/Login'
 import { useState } from 'react'
 import Home from './pages/Home'
 import Items from './pages/Items'
-import AddItem from "./components/AddItem"
+import AddItem from "./pages/AddItem"
 
 
-function App(props) {
+function App (props) {
 
   const [user, setUser] = useState(props.user)
 
   const addUser = user => {
+
     setUser(user);
   }
 
@@ -23,11 +24,12 @@ function App(props) {
 
       <Navbar user={user} setUser={addUser}/>
       
-      {/* <AddItem/>  */}
+      
        <Routes>
        <Route path='/' element={<Home />} />
        <Route path='/signup' element={<Signup user={user}/>} />
       
+       
        <Route path="/items/add" element={<AddItem/>} />
        <Route path='/login' element={<Login user={user} setUser={addUser}/>} />
        <Route path='/items' element={<Items user={user}/>} />
