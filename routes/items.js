@@ -12,9 +12,9 @@ router.get("/items", (req, res, next) => {
         .catch(err => next(err));
 });
 
-router.post('/items', fileUploader.single("imageUrl"), (req, res, next) => {
+router.post('/items', (req, res, next) => {
     const { title, imageUrl, description, address } = req.body;
-    console.log('test')
+    console.log('this is req.body', req.body)
     // const owner = req.session.user._id;
     Item.create({
         title,
@@ -33,7 +33,7 @@ router.post('/items', fileUploader.single("imageUrl"), (req, res, next) => {
         })
 
     // POST "/api/upload" => Route that will receive an image, send it to Cloudinary via the fileUploader and return the image URL
-    router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
+router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
         console.log("file is: ", req.file)
 
         if (!req.file) {
@@ -47,7 +47,7 @@ router.post('/items', fileUploader.single("imageUrl"), (req, res, next) => {
         res.json({ secure_url: req.file.path });
     });
 
-    router.get('/items/:id', (req, res, next) => {
+router.get('/items/:id', (req, res, next) => {
         //console.log(req.session.user);
         Item.findById(req.params.id)
             .then(item => {
@@ -69,5 +69,19 @@ router.post('/items', fileUploader.single("imageUrl"), (req, res, next) => {
 
 })
 
+
+router.put('/items/:id', (req, res, next) => {
+	const { title, description, address, imageUrl } = req.body
+	Item.findByIdAndUpdate(req.params.id, {
+		title,
+		description,
+        address,
+        imageUrl
+	}, { new: true })
+		.then(updatedItem => {
+			res.status(200).json(updatedItem)
+		})
+		.catch(err => next(err))
+})
 
 module.exports = router;

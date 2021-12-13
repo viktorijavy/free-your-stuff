@@ -26,7 +26,7 @@ function AddItem (props)   {
     service
       .uploadImage(uploadData)
       .then((response) => {
-        // console.log("response is: ", response);
+        console.log("response is: ", response);
         // response carries "secure_url" which we can use to update the state
         setImageUrl(response.secure_url);
       })
@@ -45,10 +45,10 @@ function AddItem (props)   {
       .post('/items', requestBody)
 
       .then(() => {
-				// we need to trigger 'getAllProjects' in the ProjectListPage component
-        // redirect('/items')
+				
+        
         navigate('/items')
-				props.refreshItems()
+				// props.refreshItems()
         
       })
 
@@ -61,7 +61,7 @@ function AddItem (props)   {
     <div className="wrap">
       <h2 className="register-title">New Item</h2>
       <form className="register" onSubmit={handleSubmit}>
-        {/* <label>Title</label> */}
+        
         <input 
           className="register-input"
           placeholder="Title"
@@ -70,7 +70,7 @@ function AddItem (props)   {
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        {/* <label>Description</label> */}
+        
         <textarea 
           className="register-input"
           placeholder="Add a description here"
@@ -79,7 +79,7 @@ function AddItem (props)   {
           onChange={(e) => setDescription(e.target.value)} 
         />
 
-        {/* <label>Address</label> */}
+        
         <input
         className="register-input"
         placeholder="Address"

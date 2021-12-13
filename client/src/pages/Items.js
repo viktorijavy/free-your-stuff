@@ -1,9 +1,10 @@
 import React from 'react'
 import { useState, useEffect } from "react";
-// import service from "../cloudinary/service"
-// import AddItem from './AddItem'
+
+import ItemCard from '../components/ItemCard';
 import axios from "axios";
-// import { Link } from "react-router-dom";
+// import AddItem from './AddItem';
+
 
 
 
@@ -28,19 +29,23 @@ export default function Items() {
 
   return (
     <div>
-    <div>
+    
     {/* <AddItem refreshItems={getAllItems}/> */}
-    </div>
-      <h2>All Items</h2>
+    
+      <h1 className='all-items-h1'>All Items</h1>
 
-      {items.map((item) => (
+      {/* {items.map((item) => (
         <div key={item._id}>
           <h2>{item.title}</h2>
           <img src={item.imageUrl} alt="" width="200"/>
           <p>{item.description}</p>
           <p>{item.address}</p>
         </div>
-      ))}
+      ))} */}
+      <div className='item-container-main'>
+
+      {items.map(item => <ItemCard key={item._id} {...item} />)}
+</div>
     </div>
   );
 }

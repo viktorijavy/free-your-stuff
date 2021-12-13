@@ -140,23 +140,109 @@ input {
   font-family: "Raleway";
 } 
 
-/* ::-moz-placeholder {
-  color: #aaa;
-  font-weight: 300;
-  opacity: 1;
+.item-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  width: 370px;
+  height: 450px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.3);
+
 }
 
-::-webkit-input-placeholder {
-  color: #aaa;
-  font-weight: 300;
+.item-container-main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+.item-title {
+  margin-top: 20px;
+  text-align: center;
+  color: black;
+  
 }
 
-:-ms-input-placeholder {
-  color: #aaa;
-  font-weight: 300;
+.all-items-h1 {
+  text-align: center;
+  
+
+}
+.item-container img {
+  
+  border-radius: 5px;
 }
 
-::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-} */
+.button-84 {
+  align-items: center;
+  background-color: initial;
+  background-image: linear-gradient(#464d55, #25292e);
+  border-radius: 8px;
+  border-width: 0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .1),0 3px 6px rgba(0, 0, 0, .05);
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  font-family: "Raleway";
+  font-size: 18px;
+  height: 52px;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 32px;
+  text-align: center;
+  text-decoration: none;
+  transform: translate3d(0, 0, 0);
+  transition: all 150ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.button-84:hover {
+  box-shadow: rgba(0, 1, 0, .2) 0 2px 8px;
+  opacity: .85;
+}
+
+.button-84:active {
+  outline: 0;
+}
+
+.button-84:focus {
+  box-shadow: rgba(0, 0, 0, .5) 0 0 0 3px;
+}
+
+@media (max-width: 420px) {
+  .button-84 {
+    height: 48px;
+  }
+}
+
+.item-detail-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-content: center;
+  margin-left: 30px;
+}
+
+.item-detail-container img {
+  border-radius: 10px;
+}
+.Buttons {
+  display:flex;
+  flex-direction: row;
+
+}
+.button1 {
+  margin-right: 50px;
+  margin-left: 50px;
+}

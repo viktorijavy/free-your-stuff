@@ -7,6 +7,8 @@ import { useState } from 'react'
 import Home from './pages/Home'
 import Items from './pages/Items'
 import AddItem from "./pages/AddItem"
+import ItemDetails from "./pages/ItemDetails"
+import EditItem from './pages/EditItem'
 
 
 function App (props) {
@@ -27,9 +29,10 @@ function App (props) {
       
        <Routes>
        <Route path='/' element={<Home />} />
-       <Route path='/signup' element={<Signup user={user}/>} />
+       <Route path='/signup' element={<Signup user={user}/>}/>
+       <Route path='/items/:id' element={<ItemDetails/>} />
       
-       
+       <Route path='/projects/edit/:id' element={<EditItem/>} />
        <Route path="/items/add" element={<AddItem/>} />
        <Route path='/login' element={<Login user={user} setUser={addUser}/>} />
        <Route path='/items' element={<Items user={user}/>} />
