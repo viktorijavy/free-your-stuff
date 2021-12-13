@@ -47,6 +47,8 @@ router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
         res.json({ secure_url: req.file.path });
     });
 
+
+
 router.get('/items/:id', (req, res, next) => {
         //console.log(req.session.user);
         Item.findById(req.params.id)
@@ -65,23 +67,28 @@ router.get('/items/:id', (req, res, next) => {
             })
     });
 
-
-
 })
-
 
 router.put('/items/:id', (req, res, next) => {
-	const { title, description, address, imageUrl } = req.body
-	Item.findByIdAndUpdate(req.params.id, {
-		title,
-		description,
+    const { title, description, address, imageUrl } = req.body
+    Item.findByIdAndUpdate(req.params.id, {
+        title,
+        description,
         address,
         imageUrl
-	}, { new: true })
-		.then(updatedItem => {
-			res.status(200).json(updatedItem)
+    }, { new: true })
+        .then(updatedItem => {
+            res.status(200).json(updatedItem)
+        })
+        .catch(err => next(err))
+})   
+
+router.delete('/items/:id', (req, res, next) => {
+	Item.findByIdAndDelete(req.params.id)
+		.then(() => {
+			res.status(200).json({ message: 'item deleted' })
 		})
-		.catch(err => next(err))
-})
+});
+
 
 module.exports = router;

@@ -20,6 +20,8 @@ export default function ItemDetails() {
             .catch(err => console.log(err))
     }, [id])
 
+  
+
     return (
         <>
             {item && (
@@ -40,12 +42,12 @@ export default function ItemDetails() {
                         </div>
                         <div className='Buttons'>
                             <div className='button1'>
-                                <Link to={`/items/edit/${item._id}`}>
+                                <Link style={{ textDecoration: 'none' }} to={`/items/edit/${item._id}`}>
                                     <Button> Edit item </Button>
                                 </Link>
                             </div>
                             <div className='button1'>
-                                <Button> Delete item</Button>
+                                
                             </div>
                         </div>
                     </div>

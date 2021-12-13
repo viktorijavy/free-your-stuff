@@ -32,7 +32,7 @@ function App (props) {
        <Route path='/signup' element={<Signup user={user}/>}/>
        <Route path='/items/:id' element={<ItemDetails/>} />
       
-       <Route path='/projects/edit/:id' element={<EditItem/>} />
+       <Route path='/items/edit/:id' element={<EditItem/>} />
        <Route path="/items/add" element={<AddItem/>} />
        <Route path='/login' element={<Login user={user} setUser={addUser}/>} />
        <Route path='/items' element={<Items user={user}/>} />
