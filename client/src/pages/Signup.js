@@ -62,10 +62,11 @@ export default function Signup() {
 				<button type="submit" className="register-button">Create an account</button>
 			</form>
 
-			{errorMessage && <p>{errorMessage}</p>}
+			{errorMessage && <p className='error-message'>{errorMessage}</p>}
 
-			<p>Already have an account?</p>
-			<Link to='/login'>Login</Link>
+			<p className='signup-p'>Already have an account?</p>
+			
+			<Link to='/login'><p className='signup-p'>Login</p></Link>
 		</div>
 	)
 }

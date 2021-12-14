@@ -111,7 +111,7 @@ input {
   background: #fcfcfc;
   border: 1px solid;
   border-color: #d8d8d8 #d1d1d1 #c3c3c3;
-  border-radius: 2px;
+  border-radius: 5px;
   cursor: pointer;
   -webkit-box-shadow: inset 0 -1px rgba(0, 0, 0, 0.03), 0 1px rgba(0, 0, 0, 0.04);
   box-shadow: inset 0 -1px rgba(0, 0, 0, 0.03), 0 1px rgba(0, 0, 0, 0.04);
@@ -182,7 +182,7 @@ input {
   align-items: center;
   background-color: initial;
   background-image: linear-gradient(#464d55, #25292e);
-  border-radius: 8px;
+  border-radius: 5px;
   border-width: 0;
   box-shadow: 0 10px 20px rgba(0, 0, 0, .1),0 3px 6px rgba(0, 0, 0, .05);
   box-sizing: border-box;
@@ -247,3 +247,51 @@ input {
   margin-right: 20px;
   
 }
+
+.search-field {
+  display: flex;
+  justify-content: flex-end;
+  margin: 50px;
+
+}
+
+.search-input {
+  width: 410px;
+  border-radius: 5px;
+  border: 1px solid rgb(212, 210, 210);
+  padding: 10px;
+}
+
+.home-pic {
+  height: 100vh;
+  width: 100vw;
+}
+
+.home-pic {
+  position: relative;
+  text-align: end;
+  color: white;
+}
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(226, 223, 223, 0.6);
+    padding: 70px;
+    border-radius: 5px;
+}
+
+.home-page-h1 {
+  font-size: 40px;
+}
+
+.home-page-p, .signup-p {
+  font-size: 25px;
+  color: black;
+}
+.error-message {
+  font-size: 16px;
+  color: red;
+}
+
