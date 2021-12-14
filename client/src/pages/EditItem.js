@@ -106,6 +106,7 @@ export default function EditProject() {
                 />
                 <button className="register-button" type="submit">Update item</button>
                 
+
             </form>
 
         </div>

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import service from "../cloudinary/service";
 // import { redirect } from "express/lib/response";
 
-function AddItem (props)   {
+function AddItem(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("")
@@ -33,7 +33,7 @@ function AddItem (props)   {
       .catch((err) => console.log('Error while uploading the file: ', err));
   };
 
-  
+
 
 
   // this method submits the form
@@ -41,17 +41,16 @@ function AddItem (props)   {
     e.preventDefault();
     const requestBody = { title, description, address, imageUrl };
     console.log('the image', imageUrl);
+
+   
     axios
       .post('/items', requestBody)
-
       .then(() => {
-				
-        
-        navigate('/items')
-				// props.refreshItems()
-        
-      })
 
+        navigate('/items')
+        // props.refreshItems()
+
+      })
       .catch((err) => console.log(err));
   };
 
@@ -61,34 +60,34 @@ function AddItem (props)   {
     <div className="wrap">
       <h2 className="register-title">New Item</h2>
       <form className="register" onSubmit={handleSubmit}>
-        
-        <input 
+
+        <input
           className="register-input"
           placeholder="Title"
-          type="text" 
-          value={title} 
+          type="text"
+          value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        
-        <textarea 
+
+        <textarea
           className="register-input"
           placeholder="Add a description here"
           type="text"
           value={description}
-          onChange={(e) => setDescription(e.target.value)} 
+          onChange={(e) => setDescription(e.target.value)}
         />
 
-        
+
         <input
-        className="register-input"
-        placeholder="Address"
-        type="text"
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
+          className="register-input"
+          placeholder="Address"
+          type="text"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
         />
         <input
-        className="register-input"
+          className="register-input"
           name="imageUrl"
           type="file"
           onChange={handleFileUpload}

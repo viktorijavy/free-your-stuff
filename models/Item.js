@@ -23,8 +23,11 @@ const itemSchema = new Schema(
         type:  String,
         required: true
       },
-
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
   }
+}
 );
 
 const Item = model("Item", itemSchema);

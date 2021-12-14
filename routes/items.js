@@ -4,6 +4,17 @@ const Item = require("../models/Item");
 
 const fileUploader = require("../config/cloudinary");
 
+
+const isAuthor = () => {
+    return (req, res, next) => {
+        Item.findById(req.params.id).then(item => {
+            item.author.toString() === req.session.user._id
+                ? next()
+                : res.redirect("/")
+        })
+    }
+}
+
 // GET "/api/movies" => Route to list all available movies
 router.get("/items", (req, res, next) => {
 
@@ -14,13 +25,15 @@ router.get("/items", (req, res, next) => {
 
 router.post('/items', (req, res, next) => {
     const { title, imageUrl, description, address } = req.body;
-    console.log('this is req.body', req.body)
-    // const owner = req.session.user._id;
+    
+    const author = req.session.user._id;
+    console.log('this is author', author)
     Item.create({
         title,
         description,
         address,
         imageUrl,
+        author,
     })
         .then(item => {
             // we return http status code 201 - created
@@ -48,34 +61,35 @@ router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
     });
 
 
-
-router.get('/items/:id', (req, res, next) => {
-        //console.log(req.session.user);
-        Item.findById(req.params.id)
-            .then(item => {
-                // check if the id is not valid
-                // if (!mongoose.Types.ObjectId.isValid(req.params.id))
-    
-                if (!item) {
-                    res.status(404).json(item);
-                } else {
-                    res.status(200).json(item);
-                }
-            })
-            .catch(err => {
-                next(err);
-            })
-    });
-
 })
 
-router.put('/items/:id', (req, res, next) => {
+router.get('/items/:id', (req, res, next) => {
+    //console.log(req.session.user);
+
+    Item.findById(req.params.id)
+        .then(item => {
+            // check if the id is not valid
+            // if (!mongoose.Types.ObjectId.isValid(req.params.id))
+
+            if (!item) {
+                res.status(404).json(item);
+            } else {
+                res.status(200).json(item);
+            }
+        })
+        .catch(err => {
+            next(err);
+        })
+});
+
+router.put('/items/:id', isAuthor(), (req, res, next) => {
     const { title, description, address, imageUrl } = req.body
     Item.findByIdAndUpdate(req.params.id, {
         title,
         description,
         address,
-        imageUrl
+        imageUrl,
+        
     }, { new: true })
         .then(updatedItem => {
             res.status(200).json(updatedItem)
@@ -83,7 +97,7 @@ router.put('/items/:id', (req, res, next) => {
         .catch(err => next(err))
 })   
 
-router.delete('/items/:id', (req, res, next) => {
+router.delete('/items/:id', isAuthor(), (req, res, next) => {
 	Item.findByIdAndDelete(req.params.id)
 		.then(() => {
 			res.status(200).json({ message: 'item deleted' })

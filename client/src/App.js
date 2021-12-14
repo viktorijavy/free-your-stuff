@@ -9,6 +9,7 @@ import Items from './pages/Items'
 import AddItem from "./pages/AddItem"
 import ItemDetails from "./pages/ItemDetails"
 import EditItem from './pages/EditItem'
+import ProtectedRoute from './components/ProtectedRoute'
 
 
 function App (props) {
@@ -35,7 +36,17 @@ function App (props) {
        <Route path='/items/edit/:id' element={<EditItem/>} />
        <Route path="/items/add" element={<AddItem/>} />
        <Route path='/login' element={<Login user={user} setUser={addUser}/>} />
-       <Route path='/items' element={<Items user={user}/>} />
+
+       {/* <Route path='/items' element={<Items user={user}/>} /> */}
+
+       <Route
+          path='/items'
+          element={
+            <ProtectedRoute redirectTo='/login' user={user}>
+              <Items />
+            </ProtectedRoute>
+          }
+        />
 
 
        </Routes>

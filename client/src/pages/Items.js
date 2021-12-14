@@ -9,6 +9,8 @@ import axios from "axios";
 
 
 export default function Items() {
+
+  
     const [items, setItems] = useState([]);
 
 
@@ -17,7 +19,7 @@ export default function Items() {
 		// request all the projects from the server
 		axios.get('/items')
 			.then(response => {
-				console.log(response)
+				console.log('this is response from getAllItems', response)
 				setItems(response.data)
 			})
 			.catch(err => console.log(err))
