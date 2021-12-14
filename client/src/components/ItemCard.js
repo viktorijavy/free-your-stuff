@@ -9,14 +9,15 @@ export default function ItemCard({ title, description, address, imageUrl, _id })
         <div className="item-container">
 
             <div>
-                <h3 className="item-title">{title}</h3>
+            
+                <h2 className="item-title">{title}</h2>
                 </div>
                 <div>
                 <img src={imageUrl} alt="pic" width="250px" />
                 </div>
-                <div>
+                {/* <div>
                 <p>{description}</p>
-                </div>
+                </div> */}
                 <div>
                 <p>{address}</p>
                 </div>

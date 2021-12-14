@@ -37,13 +37,13 @@ export default function ItemDetails() {
         <>
             {item && (
                 <div className="item-detail-container">
-                    <h1>Details</h1>
+                <Link to={'/items'}><p>  Back to items</p></Link>
                     <div >
                         <div>
-                            <h3>{item.title}</h3>
+                            <h1>{item.title}</h1>
                         </div>
                         <div>
-                            <p>{item.description}</p>
+                            <p className='item-detail-item'>{item.description}</p>
                         </div>
                         <div>
                             <img src={item.imageUrl} alt={item.title} width="500px" />
@@ -53,7 +53,7 @@ export default function ItemDetails() {
                             {/* <p>{item.author._id}</p> */}
                         </div>
                         <div>
-                            <p>{item.address}</p>
+                            <p className='item-detail-item'>{item.address}</p>
                         </div>
                         <div className='Buttons'>
                             <div className='button1'>

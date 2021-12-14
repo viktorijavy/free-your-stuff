@@ -40,7 +40,7 @@ export default function Items() {
       type="text" 
       onChange={handleSearchChange}
       className="search-input"
-      placeholder="search here for items"  
+      placeholder="search here for items..."  
       />
 </div>
 
