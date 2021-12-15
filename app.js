@@ -34,8 +34,8 @@ app.use(
 )
 
 
-const allRoutes = require("./routes");
-app.use("/", allRoutes);
+// const allRoutes = require("./routes");
+// app.use("/", allRoutes);
 
 const auth = require("./routes/auth")
 app.use("/auth", auth);
