@@ -20,7 +20,6 @@ const itemSchema = new Schema(
 
     imageUrl: {
       type: String,
-      required: true
     },
     author: {
       type: Schema.Types.ObjectId,
