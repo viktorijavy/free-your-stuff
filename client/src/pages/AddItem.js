@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 
 // import the service file since we need it to send (and get) the data to(from) the server
-import {uploadImage} from "../cloudinary/service";
+import service from "../cloudinary/service";
 // import { redirect } from "express/lib/response";
 
 function AddItem(props) {
@@ -23,7 +23,7 @@ function AddItem(props) {
     // req.body to .create() method when creating a new movie in '/api/movies' POST route
     uploadData.append('imageUrl', e.target.files[0]);
 
-    uploadImage(uploadData)
+    service.uploadImage(uploadData)
       .then((response) => {
         console.log("response is: ", response);
         // response carries "secure_url" which we can use to update the state
