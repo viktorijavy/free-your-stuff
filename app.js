@@ -19,7 +19,7 @@ const path = require('path');
 
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-const DB_URL = "mongodb://localhost/free-your-stuff"
+const DB_URL =  process.env.MONGODB_URI
 app.use(
 	session({
 		secret: process.env.SESSION_SECRET,
