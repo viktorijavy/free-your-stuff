@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Item = require("../models/Item");
+const Post = require("../models/Post")
 
 const fileUploader = require("../config/cloudinary");
 
@@ -19,13 +20,14 @@ const isAuthor = () => {
 router.get("/items", (req, res, next) => {
 
     Item.find()
+
         .then(itemsFromDB => res.status(200).json(itemsFromDB))
         .catch(err => next(err));
 });
 
 router.post('/items', (req, res, next) => {
     const { title, imageUrl, description, address } = req.body;
-    
+
     const author = req.session.user._id;
     console.log('this is author', author)
     Item.create({
@@ -46,7 +48,7 @@ router.post('/items', (req, res, next) => {
         })
 
     // POST "/api/upload" => Route that will receive an image, send it to Cloudinary via the fileUploader and return the image URL
-router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
+    router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
         console.log("file is: ", req.file)
 
         if (!req.file) {
@@ -67,6 +69,7 @@ router.get('/items/:id', (req, res, next) => {
     //console.log(req.session.user);
 
     Item.findById(req.params.id)
+        .populate('author')
         .then(item => {
             // check if the id is not valid
             // if (!mongoose.Types.ObjectId.isValid(req.params.id))
@@ -89,20 +92,53 @@ router.put('/items/:id', isAuthor(), (req, res, next) => {
         description,
         address,
         imageUrl,
-        
+
     }, { new: true })
         .then(updatedItem => {
             res.status(200).json(updatedItem)
         })
         .catch(err => next(err))
-})   
+})
 
 router.delete('/items/:id', isAuthor(), (req, res, next) => {
-	Item.findByIdAndDelete(req.params.id)
-		.then(() => {
-			res.status(200).json({ message: 'item deleted' })
-		})
+    Item.findByIdAndDelete(req.params.id)
+        .then(() => {
+            res.status(200).json({ message: 'item deleted' })
+        })
 });
+
+
+//Messaging 
+
+router.post("/items/:id/post", (req, res, next) => {
+    const loggedInUser = req.session.user
+    const id = req.params.id
+
+    const { message} = req.body
+
+    console.log("message:", message)
+
+    // const postedDate = shortDates(datePost)
+
+    Post.create({
+        poster: loggedInUser,
+        item: id,
+        message,
+       
+    })
+        .then(post => {
+            Item.findByIdAndUpdate(id, { $push: { post: post._id } })
+            .populate('post')
+            .then(
+                (post) => {
+                    console.log("post is", post)
+                    res.status(200).json(post)
+                }
+            )
+        })
+        .catch(err => next(err))
+})
+
 
 
 module.exports = router;

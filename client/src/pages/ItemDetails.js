@@ -6,18 +6,30 @@ import Button from '../components/Button'
 
 export default function ItemDetails() {
 
+    const [item, setItem] = useState(null)
+    const [message, setMessage] = useState('')
+    const [posts, setPosts] = useState([])
+
     let navigate = useNavigate();
 
     const handleDelete = () => {
-		axios.delete(`/items/${id}`)
-			.then(() => {
-				// redirect to the projects list 
-				navigate('/items')
-			})
-			.catch(err => console.log(err))
-	}
+        axios.delete(`/items/${id}`)
+            .then(() => {
+                // redirect to the projects list 
+                navigate('/items')
+            })
+            .catch(err => console.log(err))
+    }
 
-    const [item, setItem] = useState(null)
+  const handleMessageSubmit = () => {
+      axios.post(`/items/${id}/post`, {message})
+      .then((response) => {
+          console.log("response:", response)
+          setPosts(response.data.post)
+          setMessage('')
+        //   navigate(`/items/${id}`)
+      })
+  }
 
     const { id } = useParams()
     console.log('this is item id', id)
@@ -31,13 +43,13 @@ export default function ItemDetails() {
             .catch(err => console.log(err))
     }, [id])
 
-   
+
 
     return (
         <>
             {item && (
                 <div className="item-detail-container">
-                <Link to={'/items'}><p>  Back to items</p></Link>
+                    <Link to={'/items'}><p> Back to items</p></Link>
                     <div >
                         <div>
                             <h1>{item.title}</h1>
@@ -50,7 +62,7 @@ export default function ItemDetails() {
                         </div>
 
                         <div>
-                            {/* <p>{item.author._id}</p> */}
+                            <p> Created by {item.author.name}</p>
                         </div>
                         <div>
                             <p className='item-detail-item'>{item.address}</p>
@@ -62,14 +74,32 @@ export default function ItemDetails() {
                                 </Link>
                             </div>
                             <div className='button1'>
-                            {/* <Link style={{ textDecoration: 'none' }} to={`/items/edit/${item._id}`}></Link> */}
-                                    <button className='button-84' onClick={handleDelete}> Delete item </button>
-                                
+
+                                <button className='button-84' onClick={handleDelete}> Delete item </button>
+
                             </div>
                         </div>
                     </div>
+
+
                 </div>
+
+
             )}
+
+            <form onSubmit={handleMessageSubmit}>
+                <textarea
+                    cols="30"
+                    rows="3"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                />
+                <button type="submit">Send</button>
+            </form>
+            
+            {posts.map(post => {
+                return <p>{post.message}</p>
+            })}
         </>
     )
 }

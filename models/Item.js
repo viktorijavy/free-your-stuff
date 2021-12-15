@@ -4,10 +4,9 @@ const { Schema, model } = require("mongoose");
 const itemSchema = new Schema(
   {
     title: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
-    
 
     description: {
       type: String,
@@ -15,19 +14,25 @@ const itemSchema = new Schema(
     },
 
     address: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
 
     imageUrl: {
-        type:  String,
-        required: true
-      },
+      type: String,
+      required: true
+    },
     author: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    post: [
+      {
         type: Schema.Types.ObjectId,
-        ref: "User",
+        ref: "Post",
+      },
+    ],
   }
-}
 );
 
 const Item = model("Item", itemSchema);

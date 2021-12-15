@@ -34,16 +34,25 @@ function App (props) {
        <Route path='/items/:id' element={<ItemDetails/>} />
       
        <Route path='/items/edit/:id' element={<EditItem/>} />
-       <Route path="/items/add" element={<AddItem/>} />
+       
        <Route path='/login' element={<Login user={user} setUser={addUser}/>} />
 
-       {/* <Route path='/items' element={<Items user={user}/>} /> */}
+       
 
        <Route
           path='/items'
           element={
             <ProtectedRoute redirectTo='/login' user={user}>
               <Items />
+            </ProtectedRoute>
+          }
+        />
+
+       <Route
+          path='/items/add'
+          element={
+            <ProtectedRoute redirectTo='/login' user={user}>
+              <AddItem />
             </ProtectedRoute>
           }
         />
