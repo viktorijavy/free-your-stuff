@@ -14,6 +14,8 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 
+const path = require('path');
+app.use(express.static(path.join(__dirname, "/client/build")));
 
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -40,6 +42,11 @@ app.use("/auth", auth);
 
 const items = require('./routes/items');
 app.use('/', items); 
+
+app.use((req, res) => {
+	// If no routes match, send them the React HTML.
+	res.sendFile(__dirname + "/client/build/index.html");
+  });
 
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes

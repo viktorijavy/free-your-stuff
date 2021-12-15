@@ -110,6 +110,15 @@ router.delete('/items/:id', isAuthor(), (req, res, next) => {
 
 //Messaging 
 
+router.get('/items/:id/post', (req, res, next) => {
+    Post.find({item: req.params._id})
+    .then(postsFromDB => {
+        console.log("POOOOSSSSSTTTTTSSSSS",postsFromDB)
+        res.status(200).json(postsFromDB)
+    })
+    .catch(err => next(err));
+})
+
 router.post("/items/:id/post", (req, res, next) => {
     const loggedInUser = req.session.user
     const id = req.params.id
@@ -138,6 +147,8 @@ router.post("/items/:id/post", (req, res, next) => {
         })
         .catch(err => next(err))
 })
+
+
 
 
 
