@@ -15,7 +15,7 @@ const app = express();
 require("./config")(app);
 
 const path = require('path');
-app.use(express.static(path.join(__dirname, "/client/build")));
+
 
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -42,6 +42,9 @@ app.use("/auth", auth);
 
 const items = require('./routes/items');
 app.use('/', items); 
+
+
+app.use(express.static(path.join(__dirname, "/client/build")));
 
 app.use((req, res) => {
 	// If no routes match, send them the React HTML.
