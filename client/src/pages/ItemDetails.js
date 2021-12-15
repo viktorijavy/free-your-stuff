@@ -9,27 +9,52 @@ export default function ItemDetails() {
     const [item, setItem] = useState(null)
     const [message, setMessage] = useState('')
     const [posts, setPosts] = useState([])
-
+    
     let navigate = useNavigate();
 
     const handleDelete = () => {
         axios.delete(`/items/${id}`)
             .then(() => {
-                // redirect to the projects list 
                 navigate('/items')
             })
             .catch(err => console.log(err))
     }
 
-  const handleMessageSubmit = () => {
-      axios.post(`/items/${id}/post`, {message})
-      .then((response) => {
-          console.log("response:", response)
-          setPosts(response.data.post)
-          setMessage('')
-        //   navigate(`/items/${id}`)
-      })
-  }
+
+    const getComments = () => {
+        axios.get(`/items/${id}/post`)
+        .then(response => {
+            console.log('something', response.data)
+            setPosts(response.data)
+        })
+    }
+
+    useEffect(() => {
+        getComments()
+    }, [])
+
+    const handleMessageSubmit = (e) => {
+        e.preventDefault()
+        axios.post(`/items/${id}/post`, { message })
+            .then((response) => {
+                console.log("response:", response)
+                setPosts(response.data.post)
+                console.log('this is responose data:', response.data)
+                setMessage('')
+                //   navigate(`/items/${id}`)
+            })
+    }
+
+    
+
+    // useEffect(() => {
+    //     axios.get(`/items/${id}/post`).then(res => console.log(res))
+    // }, [])
+
+
+
+
+
 
     const { id } = useParams()
     console.log('this is item id', id)
@@ -86,20 +111,20 @@ export default function ItemDetails() {
 
 
             )}
+            <div className='comment-section'>
+                <form onSubmit={handleMessageSubmit}>
+                    <textarea
+                        cols="30"
+                        rows="3"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                    />
+                    <button type="submit">Send</button>
+                </form>
 
-            <form onSubmit={handleMessageSubmit}>
-                <textarea
-                    cols="30"
-                    rows="3"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                />
-                <button type="submit">Send</button>
-            </form>
-            
-            {posts.map(post => {
-                return <p>{post.message}</p>
-            })}
+                {posts.map(post => <p>{post.message}</p>)}
+
+            </div>
         </>
     )
 }
