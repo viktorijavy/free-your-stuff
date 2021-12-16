@@ -59,7 +59,7 @@ export default function ItemDetails() {
         <>
             {item && (
                 <div className="item-detail-container">
-                    <Link to={'/items'}><p> Back to items</p></Link>
+                    <Link to={'/items'} style={{ textDecoration: 'none' }}><p> &larr; Back to items</p></Link>
                     <div >
                         <div>
                             <h1>{item.title}</h1>
