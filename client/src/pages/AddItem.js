@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import service from "../cloudinary/service";
 // import { redirect } from "express/lib/response";
 
-function AddItem(props) {
+function AddItem   () {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("")
@@ -23,10 +23,11 @@ function AddItem(props) {
     // req.body to .create() method when creating a new movie in '/api/movies' POST route
     uploadData.append('imageUrl', e.target.files[0]);
 
-    service.uploadImage(uploadData)
+    service.uploadImage(uploadData) 
       .then((response) => {
         console.log("response is: ", response);
         // response carries "secure_url" which we can use to update the state
+
         setImageUrl(response.secure_url);
       })
       .catch((err) => console.log('Error while uploading the file: ', err));
@@ -43,7 +44,7 @@ function AddItem(props) {
 
    
     axios
-      .post('/items', requestBody)
+      .post('/api/items', requestBody)
       .then(() => {
 
         navigate('/items')

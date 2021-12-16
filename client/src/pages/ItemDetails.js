@@ -12,8 +12,23 @@ export default function ItemDetails() {
     
     let navigate = useNavigate();
 
+    const { id } = useParams()
+    console.log('this is item id', id)
+
+    useEffect(() => {
+        axios.get(`/api/items/${id}`)
+            .then(response => {
+
+                setItem(response.data)
+            })
+            .catch(err => console.log(err))
+    }, [id])
+
+
+
     const handleDelete = () => {
-        axios.delete(`/items/${id}`)
+        
+        axios.delete(`/api/items/${id}`)
             .then(() => {
                 navigate('/items')
             })
@@ -21,31 +36,29 @@ export default function ItemDetails() {
     }
 
 
-    const getComments = () => {
-        axios.get(`/items/${id}/post`)
-        .then(response => {
-            console.log('something', response.data)
-            setPosts(response.data)
-        })
-    }
+    // const getComments = () => {
+    //     axios.get(`/items/${id}/post`)
+    //     .then(response => {
+    //         console.log('something', response.data)
+    //         setPosts(response.data)
+    //     })
+    // }
 
-    useEffect(() => {
-        getComments()
-    }, [])
+    // useEffect(() => {
+    //     getComments()
+    // }, [])
 
     const handleMessageSubmit = (e) => {
         e.preventDefault()
-        axios.post(`/items/${id}/post`, { message })
+        axios.post(`/api/items/${id}/post`, { message })
             .then((response) => {
                 console.log("response:", response)
                 setPosts(response.data.post)
-                console.log('this is responose data:', response.data)
+                console.log('this is response data:', response.data)
                 setMessage('')
-                //   navigate(`/items/${id}`)
+            
             })
     }
-
-    
 
     // useEffect(() => {
     //     axios.get(`/items/${id}/post`).then(res => console.log(res))
@@ -53,20 +66,7 @@ export default function ItemDetails() {
 
 
 
-
-
-
-    const { id } = useParams()
-    console.log('this is item id', id)
-
-    useEffect(() => {
-        axios.get(`/items/${id}`)
-            .then(response => {
-
-                setItem(response.data)
-            })
-            .catch(err => console.log(err))
-    }, [id])
+    
 
 
 
@@ -108,7 +108,6 @@ export default function ItemDetails() {
 
 
                 </div>
-
 
             )}
             <div className='comment-section'>

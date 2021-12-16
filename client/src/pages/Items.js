@@ -20,7 +20,7 @@ export default function Items() {
   })
 
   const getAllItems = () => {
-    axios.get('/items')
+    axios.get('/api/items')
       .then(response => {
         console.log('this is response from getAllItems', response)
         setItems(response.data)

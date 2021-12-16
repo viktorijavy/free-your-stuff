@@ -36,7 +36,7 @@ export default function EditProject() {
     let navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`/items/${id}`)
+        axios.get(`/api/items/${id}`)
             .then(response => {
                 const { title, description, address, imageUrl } = response.data
                 setTitle(title)
@@ -50,7 +50,7 @@ export default function EditProject() {
     const handleSubmit = e => {
         e.preventDefault()
         const requestBody = { title, description, address, imageUrl }
-        axios.put(`/items/${id}`, requestBody)
+        axios.put(`/api/items/${id}`, requestBody)
             .then(response => {
                 // this is a redirect using react router
                 navigate(`/items/${id}`)
