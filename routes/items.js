@@ -11,7 +11,7 @@ const isAuthor = () => {
         Item.findById(req.params.id).then(item => {
             item.author.toString() === req.session.user._id
                 ? next()
-                : res.redirect("/")
+                : res.redirect("/items/id")
         })
     }
 }
@@ -70,6 +70,7 @@ router.get('/items/:id', (req, res, next) => {
 
     Item.findById(req.params.id)
         .populate('author')
+        .populate('post')
         .then(item => {
             // check if the id is not valid
             // if (!mongoose.Types.ObjectId.isValid(req.params.id))
@@ -121,13 +122,14 @@ router.get('/items/:id/post', (req, res, next) => {
 
 router.post("/items/:id/post", (req, res, next) => {
     const loggedInUser = req.session.user
+    
     const id = req.params.id
 
     const { message} = req.body
 
     console.log("message:", message)
 
-    // const postedDate = shortDates(datePost)
+    
 
     Post.create({
         poster: loggedInUser,

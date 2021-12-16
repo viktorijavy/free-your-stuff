@@ -57,15 +57,6 @@ export default function EditProject() {
             })
     }
 
-    // const deleteItem = () => {
-    // 	axios.delete(`/items/${id}`)
-    // 		.then(() => {
-    // 			// redirect to the projects list 
-    // 			navigate('/items')
-    // 		})
-    // 		.catch(err => console.log(err))
-    // }
-
     return (
 
         <div className="wrap">
