@@ -9,9 +9,7 @@ export default function Navbar(props) {
     const handleLogout = (e) => {
         
         return axios.delete('/auth/logout')
-            .then(response => {
-				console.log('response when log out', response)
-                
+            .then(response => {		 
               props.setUser(null)
 				return response.data;
             })
@@ -19,9 +17,6 @@ export default function Navbar(props) {
                 return err.response.data;
             });
     }
-
-    console.log('logging props.user', props.user)
-  
 
 	return (
 		<nav className='topnav'>

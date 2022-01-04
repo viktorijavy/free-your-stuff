@@ -1,4 +1,4 @@
-import React  from 'react'
+import React from 'react'
 import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -10,25 +10,20 @@ export default function ItemDetails() {
     const [item, setItem] = useState(null)
     const [message, setMessage] = useState('')
     const [posts, setPosts] = useState([])
-    
+
     let navigate = useNavigate();
-    console.log(posts)
+
     const { id } = useParams()
-    console.log('this is item id', id)
 
     useEffect(() => {
         axios.get(`/api/items/${id}`)
             .then(response => {
-
                 setItem(response.data)
             })
             .catch(err => console.log(err))
     }, [id])
 
-
-
     const handleDelete = () => {
-        
         axios.delete(`/api/items/${id}`)
             .then(() => {
                 navigate('/items')
@@ -41,16 +36,13 @@ export default function ItemDetails() {
         e.preventDefault()
         axios.post(`/api/items/${id}/post`, { message })
             .then((response) => {
-                // console.log("response:", response)
                 setPosts(response.data.post)
-                // console.log('this is response data:', response.data)
                 setMessage('')
                 axios.get(`/api/items/${id}`)
-                .then(response => {
-    
-                    setItem(response.data)
-                })
-                .catch(err => console.log(err))
+                    .then(response => {
+                        setItem(response.data)
+                    })
+                    .catch(err => console.log(err))
             })
     }
 
@@ -80,7 +72,7 @@ export default function ItemDetails() {
                         <div className='Buttons'>
                             <div className='button1'>
 
-                            
+
                                 <Link style={{ textDecoration: 'none' }} to={`/items/edit/${item._id}`}>
                                     <Button> Edit item </Button>
                                 </Link>
@@ -99,26 +91,26 @@ export default function ItemDetails() {
             )}
             <div className='comment-section'>
                 <form onSubmit={handleMessageSubmit}>
-                <div>
-                <div className="text-button-align">
-                    <textarea
-                        className='comment-text-area'
-                        cols="40"
-                        rows="3"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                    />
-                    </div>
                     <div>
-                    <button className="comment-submit-btn" type="submit">Send</button>
+                        <div className="text-button-align">
+                            <textarea
+                                className='comment-text-area'
+                                cols="40"
+                                rows="3"
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <button className="comment-submit-btn" type="submit">Send</button>
+                        </div>
                     </div>
-                 </div>  
                 </form>
 
-                {item && item.post.map(post => 
-                <div className='comment'>
-                <p> {post.message} </p>  
-                </div>)}
+                {item && item.post.map(post =>
+                    <div className='comment'>
+                        <p> {post.message} </p>
+                    </div>)}
 
             </div>
         </>

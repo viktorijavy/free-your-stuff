@@ -12,7 +12,7 @@ import EditItem from './pages/EditItem'
 import ProtectedRoute from './components/ProtectedRoute'
 
 
-function App (props) {
+function App(props) {
 
   const [user, setUser] = useState(props.user)
 
@@ -23,23 +23,19 @@ function App (props) {
 
 
   return (
+
     <div className="App">
 
-      <Navbar user={user} setUser={addUser}/>
-      
-      
-       <Routes>
-       <Route path='/' element={<Home />} />
-       <Route path='/signup' element={<Signup user={user}/>}/>
-       <Route path='/items/:id' element={<ItemDetails/>} />
-      
-       <Route path='/items/edit/:id' element={<EditItem/>} />
-       
-       <Route path='/login' element={<Login user={user} setUser={addUser}/>} />
+      <Navbar user={user} setUser={addUser} />
 
-       
 
-       <Route
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/signup' element={<Signup user={user} />} />
+        <Route path='/login' element={<Login user={user} setUser={addUser} />} />
+
+
+        <Route
           path='/items'
           element={
             <ProtectedRoute redirectTo='/login' user={user}>
@@ -47,8 +43,27 @@ function App (props) {
             </ProtectedRoute>
           }
         />
+        <Route
+          path='/items/:id'
+          element={
+            <ProtectedRoute redirectTo='/login' user={user}>
+              <ItemDetails />
+            </ProtectedRoute>
+          }
+        />
 
-       <Route
+        <Route
+          path='/items/edit/:id'
+          element={
+            <ProtectedRoute redirectTo='/login' user={user}>
+              <EditItem />
+            </ProtectedRoute>
+          }
+        />
+
+
+
+        <Route
           path='/items/add'
           element={
             <ProtectedRoute redirectTo='/login' user={user}>
@@ -56,9 +71,7 @@ function App (props) {
             </ProtectedRoute>
           }
         />
-
-
-       </Routes>
+      </Routes>
     </div>
   );
 }
