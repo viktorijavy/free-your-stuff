@@ -71,7 +71,6 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/loggedin', (req, res, next) => {
-    console.log('this is the loggedin user from the session', req.session.user)
     const user = req.session.user
     res.json(user)
 })
